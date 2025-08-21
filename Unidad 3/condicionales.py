@@ -1,18 +1,29 @@
 
+#___________ PUNTO 10 ______________
+print("______Punto 10 ______")
 
-#___________ PUNTO 8 ______________
-print("______Punto 8 ______")
+hemisferio = input("Ingrese en que hemisferio se encuentra(N o S): ")
+dia = int(input("Ingrese que dia es: "))
+mes = input("Ingrese que mes es: ")
 
-nombre = input("Ingrese su nombre: ")
-mayus = nombre.upper()
-minus = nombre.lower()
-titulo = nombre.title()
+if (mes=="diciembre" and dia >=21) or mes == "enero" or mes == "febrero" or (mes=="marzo" and dia <=20):
+    if hemisferio == "N":
+        print("Invierno")
+    else:
+        print("Verano")
+if (mes=="marzo" and dia >=21) or mes == "abril" or mes == "mayo" or (mes=="junio" and dia <=20):
+    if hemisferio == "N":
+        print("Primavera")
+    else:
+        print("Otoño")
+if (mes=="junio" and dia >=21) or mes == "julio" or mes == "agosto" or (mes=="septiembre" and dia <=20):
+    if hemisferio == "N":
+        print("Verano")
+    else:
+        print("Invierno")
+if (mes=="septiembre" and dia >=21) or mes == "octubre" or mes == "noviembre" or (mes=="diciembre" and dia <=20):
+    if hemisferio == "N":
+        print("Otoño")
+    else:
+        print("Primavera")
 
-opcion = input(f"Elija 1, 2 o 3 segun lo deseado: \n 1. En mayusculas \n 2. En minusculas \n 3. Primera mayuscula, el resto minuscula \n - ")
-
-if opcion == "1":
-    print(mayus)
-elif opcion == "2":
-    print(minus)
-else:
-    print(titulo)
