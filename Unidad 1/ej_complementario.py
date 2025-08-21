@@ -2,26 +2,16 @@ print("")
 print("______EJERCICIOS COMPLEMENTARIOS____")
 print("")
 
-# PUNTO 1
+# PUNTO 1, 2, 3 y 4
 print("")
-print("....PUNTO 1.....")
+print("....PUNTO 1, 2, 3 y 4.....")
 print("")
 
 numero1 = 17
 print(f"Numero entero: {numero1}")
 
-# PUNTO 2
-print("")
-print("....PUNTO 2.....")
-print("")
-
 numero2 = 24.5
 print(f"Numero decimal: {numero2}")
-
-# PUNTO 3 y 4
-print("")
-print("....PUNTO 3 Y 4 .....")
-print("")
 
 suma = numero1 + numero2
 print(f"Suma: {suma}")
@@ -103,7 +93,7 @@ print(f"Edad: {mi_edad}")
 
 edad_incrementa = mi_edad + 5
 edad_disminuye = mi_edad - 10
-print(f"Mi edad incrementandole 5 es {edad_incrementa} y disminuyendole 10 es: {edad_disminuye} ")
+print(f"Mi edad incrementandole 5 es {edad_incrementa} y disminuyendole 10 es {edad_disminuye} ")
 
 #PUNTO 14
 print("")
