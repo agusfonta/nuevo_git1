@@ -1,6 +1,6 @@
 # EJ COMPLEMENTARIO INSTITUTO DE INGLES 25 de Agosto
 
-fecha_entera = input("Ingrese la fecha en formato dia de la semana, deje un espacio y DD/MM (ej: viernes, 15/04): ")
+fecha_entera = input(f"Ingrese la fecha en formato: ""dia de la semana"" "","" deje un espacio y DD/MM (ej: viernes, 15/04): ")
 
 #Separar la frase en dia de la semana, dia en numero y mes:
 
@@ -13,7 +13,9 @@ dia = dia_barra_mes[0]
 mes = dia_barra_mes[1]
 dia_sem = dia_sem.lower()
 
-if (int(dia) > 31) or (int(mes) > 12) or (dia_sem != "lunes" or dia_sem != "martes" or dia_sem != "miercoles" or dia_sem != "jueves" or dia_sem != "viernes"):
+dias_validos = ["lunes","martes","miercoles","jueves","viernes"]
+
+if (int(dia) > 31) or (int(mes) > 12) or (dia_sem not in dias_validos):
     print("Dato ingresado incorrectamente")
 else:
     if dia_sem == "lunes" or dia_sem == "martes" or dia_sem == "miercoles":
@@ -40,4 +42,7 @@ else:
         alumnos_nuevo_ciclo= int(input("Ingrese la cantidad de alumnos del nuevo ciclo: "))
         arancel_por_alumno = int(input("Ingrese el arancel por alumno: "))
         ingreso_total = print(f"El ingreso total es de {alumnos_nuevo_ciclo * arancel_por_alumno}")
+    
+    else:
+        print("Fecha ingresada correctamente, ninguna accion para realizar.")
 
