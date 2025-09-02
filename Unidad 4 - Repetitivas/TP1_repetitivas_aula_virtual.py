@@ -1,5 +1,5 @@
 # Tp 1 Estructuras repetitivas - AULA VIRTUAL
-"""
+
 #--------------- EJERCICIO 1 ---------------------
 print("---------------EJERCICIO 1 ---------------")
 
@@ -127,7 +127,7 @@ media = suma / rango
 print("\n--- Resultado ---")
 print(f"La media de los {rango} números es: {media}")
 
-"""
+
 
 #--------------- EJERCICIO 10 -----------------
 print("---------------EJERCICIO 10 --------------")
