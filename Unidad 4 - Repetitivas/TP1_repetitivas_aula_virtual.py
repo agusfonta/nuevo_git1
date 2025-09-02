@@ -83,7 +83,7 @@ for i in range(0, num+1, 1):
 else:
     print(f"La suma entre todos los numeros desde 0 hasta {num} es {suma}")
 
-"""
+
 #--------------- EJERCICIO 8 -----------------
 print("---------------EJERCICIO 8 --------------")
 
@@ -92,8 +92,9 @@ pares = 0
 impares = 0
 negativos = 0
 positivos = 0
+rango = 100
 
-for i in range(5):
+for i in range(rango):
     numero= int(input("Ingresa un numero: "))
     lista_100.append(numero)
     if numero % 2 == 0:
@@ -107,5 +108,38 @@ for i in range(5):
         negativos +=1
 
 
-print(f"Numeros: \n {lista_100}")
+print(f"Numeros: \n{lista_100}")
 print(f"Hay {pares} pares, {impares} impares, {positivos} positivos y {negativos} negativos.")
+
+
+#--------------- EJERCICIO 9 -----------------
+print("---------------EJERCICIO 9 --------------")
+
+suma = 0
+rango = 100
+
+for i in range(rango):
+    numero = int(input(f"Ingresá el número {i+1}: "))
+    suma += numero
+
+media = suma / rango
+
+print("\n--- Resultado ---")
+print(f"La media de los {rango} números es: {media}")
+
+"""
+
+#--------------- EJERCICIO 10 -----------------
+print("---------------EJERCICIO 10 --------------")
+
+num = input("Ingresa un número con al menos dos dígitos: ")
+cant_caracteres = len(num)
+invertido = ""
+
+for i in range(len(num)):
+    invertido += num[cant_caracteres - 1]
+    cant_caracteres -= 1
+
+print("Número invertido:", invertido)
+
+    
