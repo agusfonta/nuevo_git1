@@ -7,9 +7,9 @@ op_elegida = 0
 
 while menu_abierto == True:
 
-#Menu
-    print( "\n------ Menu ------")
-    print( "\n 1. Ingresar especialidades y sus cupos" \
+    # Menu
+    print("\n------ Menu ------")
+    print("\n 1. Ingresar especialidades y sus cupos " \
     "\n 2. Mostrar agenda (solo especialidades con cupos disponibles)" \
     "\n 3. Consultar cupos de una especialidad" \
     "\n 4. Especialidades sin cupo" \
@@ -18,115 +18,141 @@ while menu_abierto == True:
     "\n 7. Agenda completa" \
     "\n 8. Salir")
 
-    op_elegida = int(input( "Elije una opcion: "))
+    try:
+        op_elegida = int(input("Elije una opcion: "))
+    except ValueError:
+        print("Debes ingresar un número.")
+        continue
 
-#---------Opcion uno ----------
+    # --------- Opcion uno ----------
     if op_elegida == 1:
-        cantidad = int(input("¿Cuantas especialidades ingresaras?: "))
+        try:
+            cantidad = int(input("¿Cuántas especialidades ingresarás?: "))
+        except ValueError:
+            print("Ingresa un número válido.")
+            continue
+
         for i in range(cantidad):
-                especialidad = input("Ingresa una especialidad: ").lower()
-                while especialidad in lista_esp:
+            especialidad = input("Ingresa una especialidad: ").strip().lower()
+            while especialidad == "" or especialidad in lista_esp:
+                if especialidad == "":
+                    print("No puede estar vacío.")
+                else:
                     print("Especialidad ya ingresada.")
-                    especialidad = input("Ingresa nuevamente la especialidad: ").lower()
-                else: 
-                    lista_esp.append(especialidad)
+                especialidad = input("Ingresa nuevamente la especialidad: ").strip().lower()
+
+            try:
+                cupo = int(input("Ingresa su cupo: "))
+                while cupo < 0:
+                    print(" El cupo no puede ser negativo.")
                     cupo = int(input("Ingresa su cupo: "))
-                    lista_cupos.append(cupo)
+            except ValueError:
+                print(" Ingresa un número válido de cupos.")
+                continue
 
-#-------Opcion dos---------
-    if op_elegida == 2:
+            lista_esp.append(especialidad)
+            lista_cupos.append(cupo)
+
+    # ------- Opcion dos ---------
+    elif op_elegida == 2:
+        disponibles = False
         for i in range(len(lista_esp)):
-            if not int(lista_cupos[i]) <= 0:
-                print(f"{lista_esp[i]}: {lista_cupos[i]}")
-            if all in lista_cupos <= 0:
-                print("Ninguna especialidad con cupos disponibles")
-    
+            if lista_cupos[i] > 0:
+                print(f"{lista_esp[i]}: {lista_cupos[i]} cupos")
+                disponibles = True
+        if not disponibles:
+            print("No hay especialidades con cupos disponibles.")
 
-#---------- Opcion tres -----------
-    if op_elegida == 3:
+    # ---------- Opcion tres -----------
+    elif op_elegida == 3:
         consulta = input("Especialidad que quiere consultar: ").lower()
-        # ------ validando -----------
-        while not consulta in lista_esp: 
-            print("No encontrado en nuestra lista de especialidades")
-            otra_vez = input("Desea ingresar otra especialidad? s/n: ").lower()
-            
+        while consulta not in lista_esp:
+            print("No encontrado en nuestra lista de especialidades.")
+            otra_vez = input("¿Desea ingresar otra especialidad? s/n: ").lower()
             if otra_vez == "s":
                 consulta = input("Ingrese nuevamente: ").lower()
             else:
+                consulta = ""
                 break
-        else:
-            pos= lista_esp.index(consulta)
-            print(f"\n Cupos de {consulta}: {lista_cupos[pos]}")
+        if consulta != "":
+            pos = lista_esp.index(consulta)
+            print(f"\nCupos de {consulta}: {lista_cupos[pos]}")
 
-#---------- opcion cuatro ------------------
-    if op_elegida == 4:
+    # ---------- opcion cuatro ------------------
+    elif op_elegida == 4:
+        sin_cupos = False
         for i in range(len(lista_esp)):
-            if int(lista_cupos[i]) <= 0:
+            if lista_cupos[i] == 0:
                 print(f"{lista_esp[i]} - Cupos Agotados")
+                sin_cupos = True
+        if not sin_cupos:
+            print("No hay especialidades sin cupos.")
 
-#---------opcion cinco------------
-    if op_elegida == 5:
-        nueva_esp = input("Especialidad que quiere agregar: ").lower()
-        while nueva_esp in lista_esp: 
-            print("Especialidad ya en lista.")
-            otra_vez = input("Desea ingresar otra especialidad? s/n: ").lower()
-            if otra_vez == "s":
-                nueva_esp = input("Ingrese nuevamente: ").lower()
+    # --------- opcion cinco ------------
+    elif op_elegida == 5:
+        nueva_esp = input("Especialidad que quiere agregar: ").strip().lower()
+        while nueva_esp == "" or nueva_esp in lista_esp:
+            if nueva_esp == "":
+                print("No puede estar vacío.")
             else:
+                print("Especialidad ya en lista.")
+            otra_vez = input("¿Desea ingresar otra especialidad? s/n: ").lower()
+            if otra_vez == "s":
+                nueva_esp = input("Ingrese nuevamente: ").strip().lower()
+            else:
+                nueva_esp = ""
                 break
 
-        lista_esp.append(nueva_esp)
-        nuevo_cupo = int(input("Cupos: "))
-        lista_cupos.append(nuevo_cupo)
+        if nueva_esp != "":
+            try:
+                nuevo_cupo = int(input("Cupos: "))
+                while nuevo_cupo < 0:
+                    print("El cupo no puede ser negativo.")
+                    nuevo_cupo = int(input("Cupos: "))
+            except ValueError:
+                print("Ingresa un número válido.")
+                continue
 
-#---------------opcion seis---------------
-    if op_elegida == 6:
-        accion = input("Quiere reservar o cancelar? r/c: ").lower()
-        
-        if accion == "r": 
-            esp = input("Que especialidad quiere reservar?: ").lower()
-            # buscar si esta en la lista
-            while not esp in lista_esp: 
-                print("Especialidad no disponible.")
-                otra_vez = input("Desea ingresar otra especialidad? s/n: ").lower()
-                if otra_vez == "s":
-                    nueva_esp = input("Ingrese nuevamente: ").lower()
-                else:
-                    break
-            else:
-            # si esta reservarla y restarle a los cupos
-                pos= lista_esp.index(esp)
-                lista_cupos[pos] -= 1
-                print(f"\n Cupos acualizados de {esp}: {lista_cupos[pos]}")
+            lista_esp.append(nueva_esp)
+            lista_cupos.append(nuevo_cupo)
 
-        
-        elif accion == "c": 
-            esp = input("Que especialidad quiere cancelar?: ").lower()
-            # buscar si esta en la lista
-            while not esp in lista_esp: 
-                print("Especialidad no disponible.")
-                otra_vez = input("Desea ingresar otra especialidad? s/n: ").lower()
-                if otra_vez == "s":
-                    nueva_esp = input("Ingrese nuevamente: ").lower()
+    # --------------- opcion seis ---------------
+    elif op_elegida == 6:
+        accion = input("¿Quiere reservar o cancelar? r/c: ").lower()
+
+        if accion == "r":
+            esp = input("Qué especialidad quiere reservar?: ").lower()
+            if esp in lista_esp:
+                pos = lista_esp.index(esp)
+                if lista_cupos[pos] > 0:
+                    lista_cupos[pos] -= 1
+                    print(f"\nCupo reservado. Cupos actualizados de {esp}: {lista_cupos[pos]}")
                 else:
-                    break
+                    print(" No hay cupos disponibles para esa especialidad.")
             else:
-            # si esta reservarla y restarle a los cupos
+                print(" Especialidad no encontrada.")
+
+        elif accion == "c":
+            esp = input("Qué especialidad quiere cancelar?: ").lower()
+            if esp in lista_esp:
                 pos = lista_esp.index(esp)
                 lista_cupos[pos] += 1
-                print(f"\n Cupos acualizados de {esp}: {lista_cupos[pos]}")
-
+                print(f"\nReserva cancelada. Cupos actualizados de {esp}: {lista_cupos[pos]}")
+            else:
+                print(" Especialidad no encontrada.")
         else:
-            print("Ingrese los datos nuevamente por favor.")
+            print(" Ingresa r o c.")
 
-# ------------siete-------------
-    if op_elegida == 7:
+    # ------------ siete -------------
+    elif op_elegida == 7:
         print("AGENDA COMPLETA:")
         for i in range(len(lista_esp)):
-                print(f"{lista_esp[i]}: {lista_cupos[i]}")
+            print(f"{lista_esp[i]}: {lista_cupos[i]} cupos")
 
-#----------ocho----------------
-    if op_elegida == 8:
+    # ---------- ocho ----------------
+    elif op_elegida == 8:
         print("Saliendo...")
         menu_abierto = False
-        break
+
+    else:
+        print("Opción inválida.")
