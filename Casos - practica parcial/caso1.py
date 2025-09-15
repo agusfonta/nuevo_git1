@@ -46,9 +46,9 @@ while estamos_en_menu:
         while consultar == "s":
             titulo_a_consultar = input("Ingresa el título: ").lower()
             if titulo_a_consultar in titulos:
-                idx = titulos.index(titulo_a_consultar)
-                if ejemplares[idx] > 0:
-                    print(f"El título '{titulo_a_consultar}' está disponible ({ejemplares[idx]} ejemplares).")
+                posicion = titulos.index(titulo_a_consultar)
+                if ejemplares[posicion] > 0:
+                    print(f"El título '{titulo_a_consultar}' está disponible ({ejemplares[posicion]} ejemplares).")
                 else:
                     print(f"'{titulo_a_consultar}' está en catálogo pero sin ejemplares.")
             else:
@@ -68,18 +68,18 @@ while estamos_en_menu:
     elif op_menu == "6":
         titulo = input("¿Qué título quieres actualizar?: ").lower()
         if titulo in titulos:
-            idx = titulos.index(titulo)
+            posicion = titulos.index(titulo)
             accion = input("¿Devolución o préstamo? (d/p): ").lower()
             if accion == "d":
                 cant = int(input("¿Cuántos ejemplares devolviste?: "))
-                ejemplares[idx] += cant
+                ejemplares[posicion] += cant
             elif accion == "p":
                 cant = int(input("¿Cuántos ejemplares pediste?: "))
-                if ejemplares[idx] >= cant:
-                    ejemplares[idx] -= cant
+                if ejemplares[posicion] >= cant:
+                    ejemplares[posicion] -= cant
                 else:
                     print("No hay suficientes ejemplares para prestar.")
-            print(f"Actualización: {titulos[idx]} -> {ejemplares[idx]} ejemplares")
+            print(f"Actualización: {titulos[posicion]} -> {ejemplares[posicion]} ejemplares")
         else:
             print("Ese título no está en el catálogo.")
 
