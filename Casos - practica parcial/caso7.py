@@ -18,86 +18,88 @@ while menu == True:
     "\n 6. Actualizar asistencia de un estudiante" \
     "\n 7. Salir")
 
-    op = int(input("Ingrese el numero de la opcion que desea realizar: "))
+    op = int(input("\n Ingrese el numero de la opcion que desea realizar: "))
     op_posibles = [1,2,3,4,5,6,7]
 
     if op in op_posibles:
         if op==1: 
-            print("--- 1. Ingresar alumnos ---")
+            print("\n--- 1. Ingresar alumnos ---")
             cant_alumnos = input("Ingrese la cantidad de alumnos del curso, en numeros: ")
             if cant_alumnos.isdigit() and int(cant_alumnos)>0 :
                 for i in range(int(cant_alumnos)):
                     nombre = input("Ingrese el nombre del estudiante: ")
-                    l_alumnos.append(nombre)
-                    l_asist.append(0)
+                    l_alumnos.append(nombre.lower())
+                    l_asist.append(int(0))
             else:
                 cant_alumnos = input("Dato Invalido. Por favor ingrese la cantidad de alumnos en numeros: ")
 
         elif op==2: 
-            print("--- 2. Ingresar asistencias ---")
+            print("\n--- 2. Ingresar asistencias ---")
             for i in range(len(l_alumnos)):
-                print(f"Ingrese asistencia de {l_alumnos[i]}")
+                print(f"Ingrese asistencia de {str(l_alumnos[i]).capitalize()}")
                 asistencia = input("-> ")
-                if asistencia.isdigit() and int(asistencia)>0 :
-                    l_alumnos[i] = asistencia 
+                if asistencia.isdigit() and int(asistencia)>=0 :
+                    l_asist[i] = int(asistencia)
                 else: 
-                    cant_alumnos = input("Dato Invalido. Por favor ingrese la asistencia en numeros: ")
+                    asistencia = int(input("Dato Invalido. Por favor ingrese la asistencia en numeros: "))
         
         elif op==3:
-            print("---3. Mostrar lista  ---")
+            print("\n---3. Mostrar lista  ---")
             for i in range(len(l_alumnos)):
-                print(f"{l_alumnos[i]}: {l_asist[i]} asistencias.")
+                print(f"{str(l_alumnos[i]).capitalize()}: {l_asist[i]} asistencias.")
 
         elif op==4:
-            print("--- 4. Cosultar asistencia de un estudiante ---")
+            print("\n--- 4. Cosultar asistencia de un estudiante ---")
             andando = True
             while andando == True:
-                estudiante = input("Ingrese el estudiante: ")
+                estudiante = input("Ingrese el estudiante: ").lower()
 
                 if estudiante in l_alumnos: 
                     pos = l_alumnos.index(estudiante)
-                    print(f"{l_alumnos[i]} tiene {l_asist[i]} asistencias.")
+                    print(f"{str(estudiante).capitalize()} tiene {l_asist[pos]} asistencias.")
 
-                    pregunta = input("Quiere consultar otro alumno? si/no: ")
-                    if pregunta.lower() == "si":
+                    pregunta = input("Quiere consultar otro alumno? si/no: ").lower()
+                    if pregunta == "si":
                         andando = True
-                    elif pregunta.lower() == "no":
+                    elif pregunta == "no":
                         andando = False
                     else: 
-                        pregunta = input("Por favor responda con si/no: ")
+                        pregunta = input("Por favor responda con si/no: ").lower()
                 else: 
                     print("Estudiante no encontrado en la lista.")
 
         elif op==5:
-            print("--- 5. Alumnos sin asistencia ---")
+            print("\n--- 5. Alumnos sin asistencia ---")
             for i in range(len(l_alumnos)):
-                if l_alumnos[i] ==0:
-                    print(f"{l_alumnos[i]}: {l_asist[i]} asistencias.")
+                if l_asist[i] == 0:
+                    print(f"{str(l_alumnos[i]).capitalize()}: {l_asist[i]} asistencias.")
+                else:
+                    continue
 
         elif op==6:
             
-            print("--- 6. Actualizar asistencia de un estudiante ---")
+            print("\n--- 6. Actualizar asistencia de un estudiante ---")
             andando = True
             while andando == True:
-                estudiante = input("Ingrese el estudiante: ")
+                estudiante = input("Ingrese el estudiante: ").lower()
                 if estudiante in l_alumnos: 
                     pos = l_alumnos.index(estudiante)
-                    l_asist[pos] =+ 1
+                    l_asist[pos] = int(l_asist[pos]) + 1
 
-                    print(f"Actualizacion realizada. {estudiante} tiene {l_asist[pos]} asistencias.")
+                    print(f"Actualizacion realizada. {str(estudiante).capitalize()} tiene {l_asist[pos]} asistencias.")
                     
-                    pregunta = input("Quiere consultar otro alumno? si/no: ")
-                    if pregunta.lower() == "si":
+                    pregunta = input("Quiere consultar otro alumno? si/no: ").lower()
+                    if pregunta == "si":
                         andando = True
-                    elif pregunta.lower() == "no":
+                    elif pregunta == "no":
                         andando = False
                     else: 
-                        pregunta = input("Por favor responda con si/no: ")
+                        pregunta = input("Por favor responda con si/no: ").lower()
                 else: 
                     print("Estudiante no encontrado en la lista.")
 
         elif op==7:
-            print("... Saliendo ...")
+            print("\n... Saliendo ...")
             print("________________")
             menu = False
 
