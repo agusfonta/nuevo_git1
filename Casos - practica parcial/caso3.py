@@ -33,23 +33,37 @@ while andando == True:
         cant = input("Cuantas tarjetas quieres ingresar?: ")
         if cant.isdigit(): 
             for i in range(int(cant)):
-                tarjeta = int(input("Ingresa un numero de tarjeta SUBE: "))
+                tarjeta = input("Ingresa un numero de tarjeta SUBE: ")
                 if len(tarjeta) == 16: 
                     sube.append(tarjeta)
                 else:
-                    tarjeta = int(input("Por favor ingresa un numero de tarjeta SUBE que contenga 16 digitos: "))
+                    tarjeta = input("Por favor ingresa un numero de tarjeta SUBE que contenga 16 digitos: ")
         else: 
             cant = input("Ingresa un numero, por favor: ")
 
     if op == 2: 
-        for i in range(cant):
-            print(f"Ingresa el saldo de la tarjeta {sube[i]}")
-            dinero = input("-> ")
-            if dinero.isdigit() and int(dinero) > 0:
-                saldo.append(int(dinero))
-            else:
-                print(f"Ingresa un saldo valido, por favor")
-                dinero = input("-> ")
+        for i in range(int(cant)):
+            tipo = input("El saldo es negativo o positivo. n/p: ").lower
+
+            if tipo == "p":
+                print(f"Ingresa el saldo de la tarjeta {sube[i]}")
+                dinero = input("-> $")
+                if dinero.isdigit() and int(dinero)> 0:
+                    saldo.append(int(dinero))
+                else:
+                    print(f"Ingresa un saldo valido, por favor")
+                    dinero = input("-> $")
+            
+            elif tipo == "n":
+                print(f"Ingresa el saldo de la tarjeta {sube[i]} solo en numeros (sin signo -)")
+                dinero = input("-> $- ")
+                if dinero.isdigit() and int(dinero)< 0:
+                    saldo.append(int(dinero))
+                else:
+                    print(f"Ingresa un saldo valido, por favor solo numeros")
+                    dinero = input("-> $-")
+            else: 
+                tipo = input("Responda con n o p, por favor: ").lower
     
     if op == 3:
         for i in range(len(sube)):
