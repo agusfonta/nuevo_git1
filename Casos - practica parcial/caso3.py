@@ -9,6 +9,7 @@
 
 sube = []
 saldo = []
+negativo_o_positivo = []
 op = 0
 andando = True
 
@@ -43,31 +44,38 @@ while andando == True:
 
     if op == 2: 
         for i in range(int(cant)):
-            tipo = input("El saldo es negativo o positivo. n/p: ").lower
+            print(f"Tarjeta {sube[i]}")
+            tipo = input("El saldo es 1.Negativo - 2.Positivo. Responda con 1 o 2: ")
 
-            if tipo == "p":
-                print(f"Ingresa el saldo de la tarjeta {sube[i]}")
+            if int(tipo) == 2:
+                print(f"Ingresa el saldo de la tarjeta {sube[i]} solo en numeros")
                 dinero = input("-> $")
                 if dinero.isdigit() and int(dinero)> 0:
                     saldo.append(int(dinero))
+                    negativo_o_positivo.append("+")
                 else:
                     print(f"Ingresa un saldo valido, por favor")
                     dinero = input("-> $")
-            
-            elif tipo == "n":
-                print(f"Ingresa el saldo de la tarjeta {sube[i]} solo en numeros (sin signo -)")
-                dinero = input("-> $- ")
-                if dinero.isdigit() and int(dinero)< 0:
                     saldo.append(int(dinero))
+                    negativo_o_positivo.append("+")
+            
+            elif int(tipo) == 1:
+                print(f"Ingresa el saldo de la tarjeta {sube[i]} solo en numeros (sin signo -)")
+                dinero = input("-> $-")
+                if dinero.isdigit():
+                    saldo.append(int(dinero))
+                    negativo_o_positivo.append("-")
                 else:
                     print(f"Ingresa un saldo valido, por favor solo numeros")
                     dinero = input("-> $-")
+                    saldo.append(int(dinero))
+                    negativo_o_positivo.append("-")
             else: 
-                tipo = input("Responda con n o p, por favor: ").lower
+                tipo = input("Responda con 1 o 2, por favor: ")
     
     if op == 3:
         for i in range(len(sube)):
-            print(f"Tarjeta: {sube[i]} -> Saldo: ${saldo[i]}")
+            print(f"Tarjeta: {sube[i]} -> Saldo: ${negativo_o_positivo}{saldo[i]}")
 
     if op == 4: 
         otro = "si"
