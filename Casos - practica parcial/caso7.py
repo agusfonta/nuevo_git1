@@ -105,9 +105,3 @@ while menu == True:
 
     else: 
         op = int(input("Ingrese una opcion valida, en numeros por favor: "))
-
-
-
-
-
-

@@ -75,7 +75,7 @@ while andando == True:
     
     if op == 3:
         for i in range(len(sube)):
-            print(f"Tarjeta: {sube[i]} -> Saldo: ${negativo_o_positivo}{saldo[i]}")
+            print(f"Tarjeta: {sube[i]} -> Saldo: ${negativo_o_positivo[i]}{saldo[i]}")
 
     if op == 4: 
         otro = "si"
@@ -92,7 +92,7 @@ while andando == True:
     if op == 5:
         for i in range(len(sube)):
             if saldo[i] <= 0:
-                print(f"Tarjeta {sube[i]}: ${saldo[i]}")
+                print(f"Tarjeta {sube[i]}: $-{saldo[i]}")
             else:
                 continue 
 
@@ -111,7 +111,6 @@ while andando == True:
             else: 
                 tarjeta = input("Ingresa el n° de la SUBE nuevamente. Asegurese de que contenga 16 caracteres: ")
 
-            # quiere cargar otra?
 
         elif accion == "d":
             tarjeta = int(input("Ingresa el n° de la SUBE: "))
