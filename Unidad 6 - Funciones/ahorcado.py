@@ -75,6 +75,7 @@ def jugar_una_partida(palabras_secretas, usadas):
             print("\n-Letra incorrecta.\n")
 
     # Preguntar si quiere jugar otra
+    
     seguir = input("¿Quieres jugar otra partida? (s/n): ").lower()
     return seguir == "s"
 
@@ -155,5 +156,5 @@ print(" *** Bienvenido al juego del Ahorcado de ANIMALES *** ")
 usadas = set()
 while True:
     if not jugar_una_partida(palabras_secretas, usadas):
-        print("Gracias por jugar. ¡Hasta la próxima!")
+        print(" Gracias por jugar. ¡Hasta la próxima!")
         break
