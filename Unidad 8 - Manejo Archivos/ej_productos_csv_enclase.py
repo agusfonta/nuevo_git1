@@ -1,5 +1,5 @@
 
-RUTA = "precios.csv"
+RUTA = "Unidad 8 - Manejo Archivos\\precios.csv"
 import csv
 
 # =============================
@@ -62,7 +62,7 @@ def mostrar_productos():
                     total += precio
                     print(f"- {nombre} → ${precio:.2f}")
                 except ValueError:
-                    print(f" Error al convertir el precio del producto: {p}")
+                    print(f" x Error al convertir el precio del producto: {p}")
 
             print(f"Total de precios: ${total:.2f}\n")
 
@@ -71,17 +71,21 @@ def mostrar_productos():
         inicializar_archivo()
 
     except ValueError:
-        print("Value Error")
+        print("x Error, valores incorrectos. ")
 
 
 
 def validar_nombre():
     # --- Validar nombre ---
     while True:
-        nombre = input("Ingrese el nombre del producto: ").strip()
-        if not nombre:
-            raise ValueError("El nombre no puede estar vacío.")
-        break  
+        try: 
+            nombre = input("Ingrese el nombre del producto: ").strip()
+            if not nombre or not nombre.isalpha():
+                raise ValueError
+            break  
+        except ValueError:
+            print(" x Error. El nombre no puede estar vacío ni contener numeros")
+
     return nombre
 
 def validar_precio():
@@ -91,28 +95,46 @@ def validar_precio():
             precio_str = input("Ingrese el precio: ").strip()
             precio = float(precio_str)
             if precio <= 0:
-                raise ValueError("El precio debe ser positivo.")
+                raise ValueError(" x El precio debe ser positivo.")
             break
         except ValueError as e:
-            print(f"Error, ingresa un numero")
+            print(f"x Error. El precio no puede estar vacio ni contener letras. Ingresa un numero valido. Sin ',' ni '.' ")
     
     return precio
 
 def agregar_producto():
     """Agrega un nuevo producto al archivo."""
-    nombre = validar_nombre()
-    precio = validar_precio()
+    nombre_agregar = validar_nombre()
+    existe = False
 
-    with open(RUTA, "a", newline="", encoding="utf-8") as archivo:
-        escritor = csv.DictWriter(archivo, fieldnames=["nombre", "precio"], delimiter=";")
-        escritor.writerow({"nombre": nombre, "precio": precio})
+    try:
+        with open(RUTA, "r", newline="", encoding="utf-8") as archivo:
+            lector = csv.DictReader(archivo, delimiter=";")
+            productos = list(lector)
 
-    print("Producto agregado correctamente.\n")
+        productos_existentes = [p for p in productos if p["nombre"].lower() != nombre_agregar.lower()]
+        if len(productos_existentes) < len(productos):
+            existe = True
+
+        if not existe:
+            precio = validar_precio()
+            with open(RUTA, "a", newline="", encoding="utf-8") as archivo:
+                escritor = csv.DictWriter(archivo, fieldnames=["nombre", "precio"], delimiter=";")
+                escritor.writerow({"nombre": nombre_agregar.capitalize(), "precio": precio})
+
+            print("- Producto agregado correctamente.\n")
+        else:
+            print("- El producto ya existe.\n")
+    
+    except FileNotFoundError:
+        print("El archivo no existe. No hay productos para eliminar.")
+        print("Creando nuevo archivo...")
+        inicializar_archivo()
 
 
 def eliminar_producto():
     """Elimina un producto por su nombre."""
-    nombre_eliminar = input("Ingrese el nombre del producto a eliminar: ").strip()
+    nombre_eliminar = validar_nombre()
     encontrado = False
 
     try:
@@ -135,6 +157,8 @@ def eliminar_producto():
 
     except FileNotFoundError:
         print("El archivo no existe. No hay productos para eliminar.")
+        print("Creando nuevo archivo...")
+        inicializar_archivo()
     
 # =============================
 # EJECUCIÓN
